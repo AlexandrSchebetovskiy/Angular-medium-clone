@@ -1,0 +1,26 @@
+<div class="card">
+  <div class="card-block">
+    <p class="card-text">{{ comment.body }}</p>
+  </div>
+  <div class="card-footer">
+    <a
+      class="comment-author"
+      [routerLink]="['/profiles', comment.author.username]"
+    >
+      <img class="comment-author-img" [src]="comment.author.image" />
+    </a>
+    &nbsp;
+    <a
+      class="comment-author"
+      [routerLink]="['/profiles', comment.author.username]"
+    >
+      {{ comment.author.username }}
+    </a>
+    <span class="date-posted"> {{ comment.createdAt | date }} </span>
+    <ng-container *ngIf="isAuthor">
+      <span (click)="handleClick(comment.id)" class="mod-options">
+        <i class="ion-trash-a"></i>
+      </span>
+    </ng-container>
+  </div>
+</div>

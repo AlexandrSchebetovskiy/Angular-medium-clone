@@ -1,0 +1,15 @@
+<div class="sidebar">
+  <p>Popular Tags</p>
+  <div *ngIf="isLoading$ | async">Loading Tags</div>
+  <div class="tag-list" *ngIf="tags$ | async as tags; else empty">
+    <a
+      [routerLink]="['/tags', tag]"
+      class="tag-default tag-pill"
+      *ngFor="let tag of tags"
+    >
+      #{{ tag }}
+    </a>
+  </div>
+</div>
+
+<ng-template #empty> There are no tags... yet </ng-template>

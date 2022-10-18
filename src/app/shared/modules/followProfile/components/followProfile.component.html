@@ -1,0 +1,11 @@
+<button
+  class="btn btn-sm action-btn btn-outline-secondary"
+  (click)="handleClick()"
+>
+  <span *ngIf="isFollowed">
+    <i class="ion-plus-round"></i> &nbsp; Follow {{ slug }}
+  </span>
+  <span *ngIf="!isFollowed">
+    <i class="ion-close-round"></i> &nbsp; Unfollow {{ slug }}
+  </span>
+</button>

@@ -1,0 +1,30 @@
+<div>
+  <form
+    class="card comment-form ng-untouched ng-pristine ng-valid"
+    [formGroup]="form"
+    (ngSubmit)="submit()"
+  >
+    <fieldset>
+      <div class="card-block">
+        <textarea
+          formControlName="body"
+          class="form-control ng-untouched ng-pristine ng-valid"
+          placeholder="Write a comment..."
+          rows="3"
+        ></textarea>
+      </div>
+      <div class="card-footer">
+        <img
+          class="comment-author-img"
+          src="https://angular.io/assets/images/logos/angular/angular.png"
+        /><button
+          [disabled]="form.invalid"
+          class="btn btn-sm btn-primary"
+          type="submit"
+        >
+          Post Comment
+        </button>
+      </div>
+    </fieldset>
+  </form>
+</div>

@@ -1,0 +1,11 @@
+button{
+  &:focus{
+    outline: none;
+
+  }
+
+}
+.btn-outline-primary:focus{
+  background-color: transparent;
+  color: #5cb85c;
+}

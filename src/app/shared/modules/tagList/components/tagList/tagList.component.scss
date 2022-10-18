@@ -1,0 +1,14 @@
+a{
+  color: #aaa;
+  transition: all .3s;
+  &:hover{
+    text-decoration: none;
+    color: #666;
+  }
+}
+li{
+  transition:border .3s;
+  &:hover{
+    border-color: #999;
+  }
+}

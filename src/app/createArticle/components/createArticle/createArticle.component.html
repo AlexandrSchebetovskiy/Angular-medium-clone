@@ -1,0 +1,8 @@
+<h1 class="text-xs-center">Create new article</h1>
+
+<app-article-form
+  [initialValues]="initialValues"
+  [isSubmitting]="(isSubmitting$ | async) || false"
+  (articleSubmit)="onSubmit($event)"
+  [errors]="backendErrors$ | async"
+></app-article-form>

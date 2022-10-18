@@ -1,0 +1,63 @@
+<div class="profile-page" *ngIf="userProfile">
+  <div class="user-info">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 col-md-10 offset-md-1">
+          <img [src]="userProfile.image" />
+          <h4>{{ userProfile.username }}</h4>
+          <p>{{ userProfile.bio }}</p>
+          <div>
+            <ng-container *ngIf="!(isOwner$ | async)">
+              <app-follow-button
+                [slug]="userProfile.username"
+                [isFollowed]="userProfile.following"
+              ></app-follow-button>
+            </ng-container>
+            <a
+              *ngIf="isOwner$ | async"
+              [routerLink]="['/settings']"
+              class="btn btn-sm btn-outline-secondary action-btn"
+            >
+              Edit profile settings
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12 col-md-10 offset-md-1">
+        <div class="article-toggle">
+          <ul class="nav nav-pills outline-active">
+            <li class="nav-item">
+              <a
+                routerLinkActive="active"
+                [routerLink]="['/profiles', userProfile.username]"
+                [routerLinkActiveOptions]="{exact: true}"
+                class="nav-link"
+              >
+                <span *ngIf="isOwner$ | async"> My Posts </span>
+                <span *ngIf="!(isOwner$ | async)">
+                  {{ userProfile.username }} Posts
+                </span>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a
+                routerLinkActive="active"
+                [routerLink]="['/profiles', userProfile.username, 'favorites']"
+                class="nav-link"
+              >
+                Favorites posts
+              </a>
+            </li>
+          </ul>
+        </div>
+        <ng-container *ngIf="apiUrl">
+          <app-feed [apiUrl]="apiUrl"></app-feed>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>

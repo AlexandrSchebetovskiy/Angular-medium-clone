@@ -1,0 +1,91 @@
+<div class="article-page" *ngIf="article; else loader">
+  <div class="banner">
+    <div class="container">
+      <h1>{{ article.title }}</h1>
+      <div class="article-meta">
+        <a [routerLink]="['/profiles', article.author.username]">
+          <img [src]="article.author.image" />
+        </a>
+        <div class="info">
+          <a [routerLink]="['/profiles', article.author.username]">
+            {{ article.author.username }}
+          </a>
+          <span class="date">{{ article.createdAt | date }}</span>
+        </div>
+        <span *ngIf="isAuthor$ | async">
+          <a
+            [routerLink]="['/articles', article.slug, 'edit']"
+            class="btn btn-sm mr btn-outline-secondary"
+          >
+            <i class="ion-edit"></i>
+            Edit Article
+          </a>
+          <button
+            class="btn btn-sm btn-outline-danger"
+            (click)="removeArticle()"
+          >
+            <i class="ion-trash-a"></i> Delete Article
+          </button>
+        </span>
+        <span *ngIf="!(isAuthor$ | async)">
+          <app-follow-button
+            class="mr"
+            [isFollowed]="article.author.following"
+            [slug]="article.author.username"
+          ></app-follow-button>
+          <app-favorites-button
+            [isFavorited]="article.favorited"
+            [slug]="article.slug"
+            [favCount]="article.favoritesCount"
+          ></app-favorites-button>
+        </span>
+      </div>
+    </div>
+  </div>
+  <div class="container page">
+    <app-errorMessage *ngIf="error$ | async"></app-errorMessage>
+    <div class="row article-content" *ngIf="article">
+      <div class="col-xs-12">
+        <markdown>{{ article.body }}</markdown>
+
+        <app-tag-list [tags]="article.tagList"></app-tag-list>
+      </div>
+    </div>
+    <hr />
+    <div class="article-actions">
+      <ng-container *ngIf="article">
+        <div class="article-meta">
+          <a [routerLink]="['/profiles', article.author.username]">
+            <img [src]="article.author.image" />
+          </a>
+          <div class="info">
+            <a [routerLink]="['/profiles', article.author.username]">
+              {{ article.author.username }}
+            </a>
+            <span class="date">{{ article.createdAt | date }}</span>
+          </div>
+          <span *ngIf="isAuthor$ | async">
+            <a
+              [routerLink]="['/articles', article.slug, 'edit']"
+              class="btn btn-sm mr btn-outline-secondary"
+            >
+              <i class="ion-edit"></i>
+              Edit Article
+            </a>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="removeArticle()"
+            >
+              <i class="ion-trash-a"></i> Delete Article
+            </button>
+          </span>
+        </div>
+      </ng-container>
+    </div>
+    <hr />
+    <app-article-comments [slug]="slug"></app-article-comments>
+  </div>
+</div>
+<ng-template #loader>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+</ng-template>

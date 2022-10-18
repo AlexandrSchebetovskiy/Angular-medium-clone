@@ -1,0 +1,79 @@
+<div class="settings-page">
+  <div class="container page">
+    <div class="row">
+      <div class="col-md-6 offset-md-3 col-xs-12">
+        <h1 class="text-xs-center">Your Settings</h1>
+        <app-backend-error-messages
+          *ngIf="validationErrors$ | async as errors"
+          [backendErrors]="errors"
+        ></app-backend-error-messages>
+        <ng-container *ngIf="currentUser; else loader">
+          <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <fieldset>
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Url of profile picture"
+                  formControlName="image"
+                />
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input
+                  type="text"
+                  class="form-control form-control-lg"
+                  placeholder="Username"
+                  formControlName="username"
+                />
+              </fieldset>
+
+              <fieldset class="form-group">
+                <textarea
+                  type="text"
+                  class="form-control form-control-lg"
+                  rows="8"
+                  placeholder="Short bio about you"
+                  formControlName="bio"
+                ></textarea>
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input
+                  type="email"
+                  class="form-control form-control-lg"
+                  placeholder="Email"
+                  formControlName="email"
+                />
+              </fieldset>
+
+              <fieldset class="form-group">
+                <input
+                  type="password"
+                  class="form-control form-control-lg"
+                  placeholder="New password"
+                  formControlName="password"
+                />
+              </fieldset>
+              <button
+                [disabled]="form.invalid || (isSubmitting$ | async)"
+                class="btn btn-lg btn-primary pull-xs-right"
+                type="submit"
+              >
+                Update Settings
+              </button>
+            </fieldset>
+          </form>
+          <hr />
+          <button class="btn btn-outline-danger" (click)="logout()">
+            Or click here to logout
+          </button>
+        </ng-container>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loader>
+  <app-loading></app-loading>
+</ng-template>

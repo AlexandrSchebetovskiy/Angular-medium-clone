@@ -1,0 +1,23 @@
+<div class="row">
+  <div class="col-xs-12 col-md-8 offset-md-2">
+    <ng-container *ngIf="isLoggedIn$ | async; else unauthotized">
+      <app-add-comment (onSubmit)="addComment($event)"></app-add-comment>
+    </ng-container>
+    <ng-container *ngIf="comments; else loader">
+      <ng-container *ngFor="let comment of comments">
+        <app-comment-item
+          [comment]="comment"
+          (onRemove)="removeComment($event)"
+        ></app-comment-item>
+      </ng-container>
+    </ng-container>
+  </div>
+</div>
+<ng-template #loader>
+  <app-loading *ngIf="isLoading$ | async"></app-loading>
+</ng-template>
+<ng-template #unauthotized>
+  <p *ngIf="!(isLoading$ | async)" class="text-xs-center unauthorized">
+    Please <a [routerLink]="['/login']">log in</a> to leave a comment!
+  </p>
+</ng-template>

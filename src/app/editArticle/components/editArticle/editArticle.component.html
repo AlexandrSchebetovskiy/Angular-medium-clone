@@ -1,0 +1,10 @@
+<h1 class="text-xs-center">Edit article</h1>
+<app-loading *ngIf="isLoading$ | async"></app-loading>
+<ng-container *ngIf="initialValues$ | async as initialValues">
+  <app-article-form
+    [initialValues]="initialValues"
+    [isSubmitting]="(isSubmitting$ | async) || false"
+    (articleSubmit)="onSubmit($event)"
+    [errors]="backendErrors$ | async"
+  ></app-article-form>
+</ng-container>
