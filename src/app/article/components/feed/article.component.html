@@ -12,33 +12,35 @@
           </a>
           <span class="date">{{ article.createdAt | date }}</span>
         </div>
-        <span *ngIf="isAuthor$ | async">
-          <a
-            [routerLink]="['/articles', article.slug, 'edit']"
-            class="btn btn-sm mr btn-outline-secondary"
-          >
-            <i class="ion-edit"></i>
-            Edit Article
-          </a>
-          <button
-            class="btn btn-sm btn-outline-danger"
-            (click)="removeArticle()"
-          >
-            <i class="ion-trash-a"></i> Delete Article
-          </button>
-        </span>
-        <span *ngIf="!(isAuthor$ | async)">
-          <app-follow-button
-            class="mr"
-            [isFollowed]="article.author.following"
-            [slug]="article.author.username"
-          ></app-follow-button>
-          <app-favorites-button
-            [isFavorited]="article.favorited"
-            [slug]="article.slug"
-            [favCount]="article.favoritesCount"
-          ></app-favorites-button>
-        </span>
+        <div class="pull-xs-right">
+          <span *ngIf="isAuthor$ | async">
+            <a
+              [routerLink]="['/articles', article.slug, 'edit']"
+              class="btn btn-sm mr btn-outline-secondary"
+            >
+              <i class="ion-edit"></i>
+              Edit Article
+            </a>
+            <button
+              class="btn btn-sm btn-outline-danger"
+              (click)="removeArticle()"
+            >
+              <i class="ion-trash-a"></i> Delete Article
+            </button>
+          </span>
+          <span *ngIf="!(isAuthor$ | async)">
+            <app-follow-button
+              class="mr"
+              [isFollowed]="article.author.following"
+              [slug]="article.author.username"
+            ></app-follow-button>
+            <app-favorites-button
+              [isFavorited]="article.favorited"
+              [slug]="article.slug"
+              [favCount]="article.favoritesCount"
+            ></app-favorites-button>
+          </span>
+        </div>
       </div>
     </div>
   </div>

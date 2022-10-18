@@ -11,6 +11,7 @@ import {
 } from '../store/selectors'
 import {currentUserSelector} from '../../auth/store/selectors'
 import {ICurrentUser} from '../../shared/types/currentUser.interface'
+import {logoutAction} from '../../auth/store/actions/sync.action'
 
 @Component({
   selector: 'app-user-profile',
@@ -75,5 +76,9 @@ export class UserProfileComponent implements OnInit, OnDestroy {
 
   private fetchData() {
     this.store.dispatch(getUserProfileAction({slug: this.slug}))
+  }
+
+  logout() {
+    this.store.dispatch(logoutAction())
   }
 }

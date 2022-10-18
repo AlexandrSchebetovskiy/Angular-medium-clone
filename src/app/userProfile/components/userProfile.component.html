@@ -13,13 +13,15 @@
                 [isFollowed]="userProfile.following"
               ></app-follow-button>
             </ng-container>
-            <a
-              *ngIf="isOwner$ | async"
-              [routerLink]="['/settings']"
-              class="btn btn-sm btn-outline-secondary action-btn"
-            >
-              Edit profile settings
-            </a>
+            <div class="pull-xs-right">
+              <a
+                *ngIf="isOwner$ | async"
+                [routerLink]="['/settings']"
+                class="btn btn-sm btn-outline-secondary action-btn"
+              >
+                Edit profile settings
+              </a>
+            </div>
           </div>
         </div>
       </div>
