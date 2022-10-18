@@ -10,6 +10,7 @@ import {
   removeCommentFailureAction,
   removeCommentSuccessAction,
 } from '../actions/removeComment.action'
+import {getCommentsActions} from '../actions/getComments.actions'
 
 @Injectable()
 export class RemoveCommentsEffect {
@@ -19,7 +20,7 @@ export class RemoveCommentsEffect {
       switchMap(({slug, id}) => {
         return this.commentService.removeComment(slug, id).pipe(
           map(() => {
-            return removeCommentSuccessAction()
+            return removeCommentSuccessAction({id})
           }),
           catchError((errorResponse: HttpErrorResponse) => {
             return of(removeCommentFailureAction())
@@ -28,6 +29,13 @@ export class RemoveCommentsEffect {
       })
     )
   })
+
+  // refreshComments$ = createEffect(() => {
+  //   return this.actions$.pipe(
+  //     ofType(removeCommentSuccessAction),
+  //     switchMap(async () => getCommentsActions({slug: '12'}))
+  //   )
+  // })
 
   constructor(
     private actions$: Actions,

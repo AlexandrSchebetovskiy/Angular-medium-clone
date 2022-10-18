@@ -23,9 +23,9 @@ export class CommentsService {
       .post<ICommentPostResponse>(url, {comment})
       .pipe(map((res: ICommentPostResponse) => res.comment))
   }
-  removeComment(slug: string, commentId: number): Observable<void> {
+  removeComment(slug: string, commentId: number): Observable<number> {
     const url = this.getUrl(slug) + '/' + commentId
-    return this.http.delete<void>(url, {})
+    return this.http.delete<void>(url, {}).pipe(map(() => commentId))
   }
 
   private getUrl(slug: string): string {

@@ -6,7 +6,8 @@ export const removeCommentAction = createAction(
   props<{slug: string; id: number}>()
 )
 export const removeCommentSuccessAction = createAction(
-  ActionTypes.REMOVE_COMMENT_SUCCESS
+  ActionTypes.REMOVE_COMMENT_SUCCESS,
+  props<{id: number}>()
 )
 export const removeCommentFailureAction = createAction(
   ActionTypes.REMOVE_COMMENT_FAILURE

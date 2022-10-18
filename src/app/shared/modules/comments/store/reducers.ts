@@ -11,6 +11,8 @@ import {
   addCommentFailureAction,
   addCommentSuccessAction,
 } from './actions/addComment.action'
+import {removeCommentSuccessAction} from './actions/removeComment.action'
+import {IComment} from '../types/comment.interface'
 
 const initialState: ICommentsState = {
   data: null,
@@ -54,6 +56,16 @@ export const commentsReducer = createReducer(
     isLoading: false,
     error: 'Something went wrong',
   })),
+  on(removeCommentSuccessAction, (state, action) => {
+    const newData = state.data
+      ? state.data.filter((c) => c.id !== action.id)
+      : null
+
+    return {
+      ...state,
+      data: newData,
+    }
+  }),
   on(routerNavigationAction, (): ICommentsState => initialState)
 )
 
